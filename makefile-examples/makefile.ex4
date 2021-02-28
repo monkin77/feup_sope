@@ -1,0 +1,22 @@
+# Makefile example 4
+#
+# Two executables are to be created: bank , client
+# Their source code is, respectively: bank.c , client.c
+# The sources need, respectively: (common.h , bank.h) , common.h
+# For testing, all needed files can be found in the current directory 
+#
+Executables =  bank client
+Binaries =  bank.o client.o
+CFLAGS = -Wall
+
+all: $(Executables)
+
+$(Executables): % : %.o
+	cc $(CFLAGS) $< -o $@
+
+$(Binaries): common.h
+bank.o: bank.h
+
+clean:
+	rm -f $(Executables) \
+		$(Binaries)
