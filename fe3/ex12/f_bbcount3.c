@@ -15,7 +15,7 @@ void *thr_fun_dec(void *);
 int active_process = 0;
 int nthreads;
 long iter = 0;
-long count = BUF_SIZE;
+long count = 0;
 
 pthread_cond_t* conds;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
@@ -68,7 +68,7 @@ void *thr_fun_inc(void *arg) {
             iter++;
             count++;
             active_process = (active_process + 1) % nthreads;
-            pthread_cond_signal(&conds[active_process]);
+            pthread_cond_signal(&conds[active_process]);  // wake up threads waiting for the condition variable
         } else {
             pthread_cond_wait(&conds[i], &lock);        // releases a lock specified (2nd argument) and wait on cond. variable
         }

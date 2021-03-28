@@ -20,7 +20,7 @@ long count = BUF_SIZE;
 sem_t mutex;
 
 int main(int argc, char *argv[]) {
-    sem_init(&mutex, 0, 1);
+    sem_init(&mutex, 0, 1);		// initialize the semaphore
 	pthread_t *ptid;
 	int i;
 
@@ -52,17 +52,17 @@ int main(int argc, char *argv[]) {
 		pthread_join(ptid[i], NULL);
 
 	printf("\nEND!\n");
-    sem_destroy(&mutex);
+    sem_destroy(&mutex);	// Destroy the semaphore
 	return 0;
 }
 
 void *thr_fun_inc(void *arg) {
 	while (iter < MAX_ITER) {
-        sem_wait(&mutex);
+        sem_wait(&mutex);	// lock / wait for this thread turn
         printf("\n%ld", count);
         iter++;
         count++;
-        sem_post(&mutex);
+        sem_post(&mutex);	// release / signal to other threads
 	}
 	printf("\nEND thread %lu!\n", (unsigned long)pthread_self());
 	return (NULL);
