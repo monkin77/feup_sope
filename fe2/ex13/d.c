@@ -26,12 +26,12 @@ int main(void){
     switch(id){
         case -1: perror("fork"); exit(1);
         case 0:;   // Child
-            if(mkfifo("/tmp/np", 0666) < 0)
+            if (mkfifo("/tmp/np", 0666) < 0)
                 perror("mkfifo");
-            while((np = open("/tmp/np", O_RDWR)) < 0){
+            while ((np = open("/tmp/np", O_RDWR)) < 0) {
                 ;   // synchronization
             }
-            read(np, msg, 1024);    // waits ... 
+            read(np, msg, 1024);    // waits ...
             strcat(msg, " Systems");
             printf("%s \n", msg);
             write(np, " Systems", 1 + strlen(" Systems"));
@@ -40,11 +40,11 @@ int main(void){
         default:;       // Parent 
             char receivedMessage[1024];
             strcpy(msg, "Operating");
-            if(mkfifo("/tmp/np", 0666) < 0){
+            if (mkfifo("/tmp/np", 0666) < 0) {
                 perror("mkfifo");
             }
-            while((np = open("/tmp/np", O_RDWR)) < 0){
-                ; // Synchronization
+            while ((np = open("/tmp/np", O_RDWR)) < 0) {
+                ;  // Synchronization
             }
             printf("Sending message ...\n");
             write(np, msg, (1+ strlen("Operating")));
@@ -52,7 +52,7 @@ int main(void){
             int* stat_loc;
             wait(stat_loc);    // Waits for the child process to end
 
-            
+
             read(np, receivedMessage, 1024);
             strcat(msg, receivedMessage);
             printf("%s \n", msg);
@@ -62,4 +62,4 @@ int main(void){
     }
 
     return 0;
-} 
+}
