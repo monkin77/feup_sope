@@ -25,8 +25,7 @@ int main() {
 		}
 		} while (c != '\n');	// wait for [ENTER]
 
-	tms.c_lflag &= ~ICANON; // Disable Canonical mode (Start reading 1 char at a time)
-	tms.c_lflag &= ~ECHO; // inhibit char echoing (Since we want to show '*' instead)
+	tms.c_lflag &= ~ (ICANON | ECHO | ECHOE | ECHOK | ECHONL); // 
 
 	tcsetattr(STDIN_FILENO, TCSANOW, &tms); // set new configuration
 
@@ -36,16 +35,15 @@ int main() {
 		if (read(STDIN_FILENO, &c, 1) != 1)
 			perror("read failed");
 		else{
-			if(c == 0x08){
-				printf("backspace\n");
-				passIdx--;
-				password[passIdx] = ' ';
+			printf("%c", c);
+			if(c == 127){	// backspace
+				if(passIdx > 0) passIdx--;
+				password[passIdx] = '\0';
 			}
 			else{
 				password[passIdx] = c;
 				passIdx++;
 			}
-			write(STDIN_FILENO, &c, 1);
 			write(STDIN_FILENO, "***", 3);
 		}
 		} while (c != '\n');	// wait for [ENTER]
