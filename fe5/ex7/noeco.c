@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 			perror("read failed");
 		} while (c != '\n');	// wait for [ENTER]
 
-	// tcsetattr(STDIN_FILENO, TCSANOW, &tms_ini);	// reset configuration
+	tcsetattr(STDIN_FILENO, TCSANOW, &tms_ini);	// reset configuration
 	// experiment this program with the above line commented! ;-)
 	printf("\nInitial console configuration has been reset!\n");
 

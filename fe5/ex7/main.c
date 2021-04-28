@@ -11,17 +11,30 @@ int main() {
     
     printf("\nInsert your username\n");
 
-    /* JUST PRINT AND RECEIVE ANSER */
-
-	tms.c_lflag &= ~ECHO; // inhibit char echoing
-	tcsetattr(STDIN_FILENO, TCSANOW, &tms); // set new configuration
+	char username[100];
+	char password[100];
+	int userIdx = 0;
+	int passIdx = 0;
 
 	do {
 		if (read(STDIN_FILENO, &c, 1) != 1)
 			perror("read failed");
+		else{
+			username[userIdx] = c;
+			userIdx++;
+			printf("***");
+		}
 		} while (c != '\n');	// wait for [ENTER]
 
-	// tcsetattr(STDIN_FILENO, TCSANOW, &tms_ini);	// reset configuration
+	printf("\nUsername: %s", username);
+
+    /* 
+
+	tms.c_lflag &= ~ECHO; // inhibit char echoing
+	tcsetattr(STDIN_FILENO, TCSANOW, &tms); // set new configuration
+	*/
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &tms_ini);	// reset configuration
 	// experiment this program with the above line commented! ;-)
 	printf("\nInitial console configuration has been reset!\n");
 
