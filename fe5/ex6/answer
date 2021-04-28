@@ -1,0 +1,9 @@
+6-
+i) As a process is started, the scheduler initializes the quantum counter inclock ticks for the process.
+The clock driver decrements the quantum counter by 1, at every clock interrupt. When the counter gets to zero ,
+clock driver calls the scheduler to set up another process. Thus clock driver helps in preventing processes from
+running longer than time slice allowed.
+
+ii) The clock also accounts for the CPU time the processes use. The most accurate way to do this is to start a second
+timer, distinct from the main system timer, whenever a process is started. When that process is stopped, the timer
+can be read out to tell how long the process has run    

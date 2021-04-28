@@ -5,7 +5,7 @@
 # The sources need, respectively: (common.h , bank.h) , common.h
 # For testing, all needed files can be found in the current directory 
 #
-Executables =  bank client
+Executables = bank client
 Binaries =  bank.o client.o
 CFLAGS = -Wall
 
