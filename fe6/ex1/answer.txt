@@ -1,0 +1,1 @@
+By having files as a mere array of bytes, there are multiples advantages such as: 
