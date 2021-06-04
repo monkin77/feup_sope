@@ -2,19 +2,22 @@
 #include <termios.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <string.h>
 
 int main() {
 	printf("Please insert characters\n");
 
-    char s[1000];
+    char s[10000];
 
-    scanf("%s", s);
+    while(scanf("%s", s) != EOF) {
+        for(int i = 0; s[i] != '\n'; i++){
+            s[i] = toupper(s[i]);
+        }   
     
-    for(int i = 0; s[i] != '\0'; i++){
-        s[i] = toupper(s[i]);
-    }   
-    
-    printf("%s\n", s);
+        printf("%s\n", s);
+
+        memset(s, NULL, 1000);
+    }
 
     return 0;
 }

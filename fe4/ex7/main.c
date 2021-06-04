@@ -8,7 +8,7 @@ void afunc(void){
     static int level = 0;       /* recursion level */
     auto int stack_var;        /* automatic variable, on stack */
 
-    if (++level == 3)           /* avoid infinite recursion */
+    if (++level > 3)           /* avoid infinite recursion */
         return;
 
     printf("Stack level %d: address of stack_var: %p\n",

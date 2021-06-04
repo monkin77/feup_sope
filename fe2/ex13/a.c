@@ -33,7 +33,7 @@ int main(void){
         default:       // Parent         
             close(pp[0]);   // closes the reading end of the File (File descriptor)
             printf("Sending message ...\n");
-            write(pp[1], "Operating", 1+strlen("Hi parent!"));
+            write(pp[1], "Operating", 1+strlen("Operating"));
             close(pp[1]);   // closes the writing end of the File (File descriptor)
             break;
     }

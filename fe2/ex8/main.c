@@ -9,9 +9,6 @@ void func(int signo) {
 }
 
 int main(void){
-    
-    int id = fork();    // PID of the child process is returned in the parent, and 0 is returned in the child.
-
     struct sigaction new, old;
     sigset_t smask;	// defines signals to block while func() is running
 
@@ -22,18 +19,20 @@ int main(void){
     new.sa_mask = smask;
     new.sa_flags = 0;	// usually works
 
+    if(sigaction(SIGUSR1, &new, &old) == -1)	// Sigaction system call changes the action taken by a process upon receipt of a specific signal
+                perror ("sigaction");
+
+    int id = fork();    // PID of the child process is returned in the parent, and 0 is returned in the child.
+
     switch(id){
         case -1: perror("fork"); exit(1);
         case 0:                              
-            if(sigaction(SIGUSR1, &new, &old) == -1)	// Sigaction system call changes the action taken by a process upon receipt of a specific signal
-                perror ("sigaction");
-
             pause();	// wait for the arrival of a signal
 
             fprintf(stdout, "Hello \n"); 
             break;
         default: 
-            sleep(5);       // even though the parent process starts after the child, the child process waits for the parent to send the signal
+            sleep(1);       // even though the parent process starts after the child, the child process waits for the parent to send the signal
             fprintf(stdout, "World!\n");
             kill(id, SIGUSR1);      // Sends signal to process of process id = id
             break;

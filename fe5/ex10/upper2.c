@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#define MAX_ITER 10
+#define MAX_ITER 1000
 
 int main(int argc, char* argv[]) {
     FILE *fd_in = NULL;

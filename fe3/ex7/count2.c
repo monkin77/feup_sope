@@ -13,8 +13,7 @@ void *thr_fun(void *);
 
 pthread_mutex_t lock;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     pthread_t *ptid;
     int nthreads;
     int i;

@@ -29,7 +29,7 @@ void *displaySequence(void *arg){ // start routine of new threads
         }
     }
     
-    pthread_exit(arg); // return i*i
+    pthread_exit(arg);
 }
 
 

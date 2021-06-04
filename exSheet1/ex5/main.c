@@ -31,7 +31,7 @@ void alineaB(int argc, char *argv[], char *envp[])          // Since this is don
     *argv[0] = " ";     // changed the first character of the first argument (main) in order to not match any env. variable
     char *currString;
     char* envOnArgs[argc];
-    int currIdx;
+    int currIdx = 0;
     for (int i = 0; envp[i] != NULL; i++)       // iterate all the env. variables
     {
         for (int a = 0; a < argc; a++)      // iterate all the cmd args

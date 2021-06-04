@@ -10,7 +10,7 @@ void *rot(void *arg )
 { // start routine of new threads
     *((int *)arg) *= *((int *)arg);     // need to return an adress that isn't a local variable | basically makes
     printf("\n\t In thread PID: %d ; TID: %lu with argument: %d.", getpid(), (unsigned long)pthread_self(), *(int *)arg);  // arg is the argument passed on pthread_create
-    sleep(10);      // alinea B to see the threads with "ps -eLF"
+    sleep(3);      // alinea B to see the threads with "ps -eLF"
     pthread_exit(arg); // return i*i
 }
 
@@ -29,8 +29,8 @@ int main(void)
     {
         if (pthread_create(&ids[i], NULL, rot, (void *) &threadReturnValues[i]) != 0)    // send i as the argument to each thread
             exit(-1); // here, we decided to end process
-        else
-            printf("\nNew thread %d ; TID: %lu.", i, (unsigned long)ids[i]);
+
+        printf("\nNew thread %d ; TID: %lu.", i, (unsigned long)ids[i]);
     }
     // wait for finishing of created threads
     for (i = 0; i < NTHREADS; i++)

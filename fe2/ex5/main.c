@@ -9,10 +9,10 @@ int main(void){
     switch(id){
         case -1: perror("fork"); exit(1);
         case 0:                               
-            fprintf(stdout, "Hello "); 
+            fprintf(stdout, "Hello \n"); 
             break;
         default: 
-            //waitpid(id); 
+            // waitpid(id); 
             fprintf(stdout, "World!\n");
             break;
     }
